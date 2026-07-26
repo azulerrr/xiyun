@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>戏韵 — AI戏曲智能平台</title>
+<style>
+:root{--bg-page:#F5F0E8;--bg-card:#FAF7F2;--bg-elevated:#FFFFFF;--red-primary:#C43A31;--red-dark:#A02D25;--red-light:rgba(196,58,49,0.10);--gold-primary:#C9A84C;--gold-light:#E0C878;--gold-subtle:rgba(201,168,76,0.15);--text-primary:#2D2416;--text-secondary:#7A6B5A;--text-light:#A09385;--border:#E8DFD0;--border-faint:#F0EBE0;--shadow-sm:0 1px 4px rgba(45,36,22,0.06);--shadow-md:0 2px 12px rgba(45,36,22,0.08);--radius-sm:8px;--radius:12px;--radius-lg:16px;--radius-xl:20px;--font-sans:-apple-system,'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;--font-serif:'Noto Serif SC','Source Han Serif SC','STSong','SimSun',serif;--tab-height:56px;--header-height:48px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--font-sans);background:#2D2416;color:var(--text-primary);line-height:1.5;-webkit-font-smoothing:antialiased;display:flex;justify-content:center;align-items:center}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,textarea,select{font-family:inherit;outline:none}
+.app-container{width:100%;max-width:420px;height:100vh;max-height:812px;background:var(--bg-page);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 40px rgba(0,0,0,0.15)}
+.status-bar{height:28px;background:var(--bg-card);display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:11px;color:var(--text-secondary);flex-shrink:0}
+.status-bar .time{font-weight:600}
+.page-header{height:var(--header-height);background:var(--bg-card);display:flex;align-items:center;justify-content:center;padding:0 16px;flex-shrink:0;border-bottom:1px solid var(--border-faint)}
+.page-header h1{font-family:var(--font-serif);font-size:17px;font-weight:700;letter-spacing:2px;color:var(--text-primary)}
+.tab-bar{height:var(--tab-height);background:var(--bg-elevated);display:flex;align-items:stretch;flex-shrink:0;border-top:1px solid var(--border-faint)}
+.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;-webkit-tap-highlight-color:transparent;position:relative}
+.tab-item .tab-icon{font-size:22px;line-height:1;transition:transform 0.2s}
+.tab-item .tab-label{font-size:10px;color:var(--text-light);font-weight:500;transition:color 0.2s}
+.tab-item.active .tab-label{color:var(--red-primary);font-weight:600}
+.tab-item.active .tab-icon{transform:scale(1.1)}
+.tab-item.active::after{content:'';position:absolute;top:0;left:30%;right:30%;height:2px;background:var(--red-primary);border-radius:0 0 2px 2px}
+.tab-item:active{opacity:0.7}
+.main-content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.view{display:none;min-height:100%}
+.view.active{display:block}
+.home-hero{padding:28px 20px 20px;text-align:center;position:relative}
+.home-hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:400px;height:400px;background:radial-gradient(ellipse at center,rgba(196,58,49,0.05) 0%,rgba(201,168,76,0.03) 40%,transparent 70%);pointer-events:none}
+.home-hero .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border:1px solid var(--gold-subtle);border-radius:100px;font-size:11px;color:var(--gold-primary);background:rgba(201,168,76,0.06);margin-bottom:16px;letter-spacing:1px}
+.home-hero .brand-icon{width:56px;height:56px;background:linear-gradient(135deg,var(--red-primary),var(--red-dark));border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;font-family:var(--font-serif);font-weight:700;letter-spacing:3px;margin:0 auto 14px;box-shadow:0 4px 12px rgba(196,58,49,0.25)}
+.home-hero h1{font-family:var(--font-serif);font-size:26px;font-weight:700;letter-spacing:4px;margin-bottom:6px}
+.home-hero h1 span{color:var(--red-primary)}
+.home-hero .sub{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:4px}
+.home-hero .desc{font-size:12px;color:var(--text-light);line-height:1.5}
+.section-label{display:flex;align-items:center;gap:10px;padding:0 20px;margin-bottom:12px}
+.section-label .line{flex:1;height:1px;background:var(--border-faint)}
+.section-label .text{font-size:14px;font-weight:600;color:var(--text-primary);white-space:nowrap;letter-spacing:1px}
+.section-label .text small{font-weight:400;font-size:12px;color:var(--text-light)}
+.home-cards{padding:0 16px 20px;display:flex;flex-direction:column;gap:12px}
+.home-card{background:var(--bg-card);border:1px solid var(--border-faint);border-radius:var(--radius);padding:20px;display:flex;align-items:flex-start;gap:16px;cursor:pointer;transition:all 0.25s}
+.home-card:active{transform:scale(0.98);border-color:var(--red-primary)}
+.home-card .card-icon{width:48px;height:48px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.home-card:nth-child(1) .card-icon{background:var(--red-light);color:var(--red-primary)}
+.home-card:nth-child(2) .card-icon{background:var(--gold-subtle);color:var(--gold-primary)}
+.home-card .card-body{flex:1;min-width:0}
+.home-card .card-body h3{font-family:var(--font-serif);font-size:17px;font-weight:700;margin-bottom:4px;letter-spacing:1px}
+.home-card .card-body .tag{display:inline-block;padding:2px 10px;border-radius:100px;font-size:11px;font-weight:500;margin-bottom:6px}
+.home-card:nth-child(1) .card-body .tag{background:var(--red-light);color:var(--red-primary)}
+.home-card:nth-child(2) .card-body .tag{background:var(--gold-subtle);color:#a08030}
+.home-card .card-body p{font-size:13px;color:var(--text-secondary);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.home-card .card-arrow{font-size:16px;color:var(--text-light);align-self:center}
+.stages-scroll{padding:0 16px 24px;display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.stages-scroll::-webkit-scrollbar{display:none}
+.stage-mini{flex:0 0 160px;background:var(--bg-card);border:1px solid var(--border-faint);border-radius:var(--radius);padding:20px 16px}
+.stage-mini .num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:16px;font-weight:700;margin-bottom:10px}
+.stage-mini:nth-child(1) .num{background:rgba(196,58,49,0.10);color:var(--red-primary)}
+.stage-mini:nth-child(2) .num{background:rgba(201,168,76,0.12);color:var(--gold-primary)}
+.stage-mini:nth-child(3) .num{background:rgba(45,36,22,0.06);color:var(--text-primary)}
+.stage-mini h4{font-size:15px;font-weight:700;margin-bottom:2px}
+.stage-mini .sub{font-size:11px;color:var(--text-light);margin-bottom:6px}
+.stage-mini p{font-size:12px;color:var(--text-secondary);line-height:1.5}
+.learn-content{padding:16px}
+.stage-selector{display:flex;gap:6px;background:var(--bg-card);border:1px solid var(--border-faint);border-radius:var(--radius-sm);padding:4px;margin-bottom:16px}
+.stage-btn{flex:1;padding:10px 0;text-align:center;border-radius:6px;font-size:14px;color:var(--text-secondary);transition:all 0.2s;cursor:pointer}
+.stage-btn.active{background:var(--red-primary);color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(196,58,49,0.2)}
+.stage-btn .s-sub{display:block;font-size:10px;opacity:0.65;margin-top:1px}
+.wave-card{background:var(--bg-card);border:1px solid var(--border-faint);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.wave-card .wave-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.wave-card .wave-header h3{font-size:14px;font-weight:700}
+.wave-card .wave-header .status{font-size:12px;color:var(--text-light)}
+.wave-box{position:relative;width:100%;height:110px;background:var(--bg-page);border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border-faint)}
+.wave-box canvas{width:100%;height:100%;display:block}
+.wave-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-light);font-size:13px;gap:6px}
+.wave-placeholder .icon{font-size:28px}
+.wave-actions{display:flex;gap:8px;margin-top:12px}
+.btn-primary{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;background:var(--red-primary);color:#fff;transition:all 0.2s}
+.btn-primary:active{background:var(--red-dark)}
+.btn-primary.recording{background:var(--text-secondary);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.65}}
+.btn-secondary{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;background:var(--bg-page);color:var(--text-secondary);border:1px solid var(--border);transition:all 0.2s}
+.btn-secondary:active{border-color:var(--red-primary);color:var(--red-primary)}
+.score-row{display:flex;gap:8px;margin-bottom:12px}
+.score-cell{flex:1;text-align:center;padding:12px 8px;background:var(--bg-card);border:1px solid var(--border-faint);border-radius:var(--radius-sm)}
+.score-cell .num{font-size:22px;font-weight:700;font-family:var(--font-serif);color:var(--red-primary)}
+.score-cell .num.gold{color:var(--gold-primary)}
+.score-cell .lbl{font-size:11px;color:var(--text-light);margin-top:2px}
+.correction-box{background:var(--bg-card);border:1px solid var(--border-faint);border-radius:var(--radius);padding:16px}
+.correction-box .c-title{font-size:14px;font-weight:700;margin-bottom:12px}
+.c-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-faint)}
+.c-item:last-child{border-bottom:none;padding-bottom:0}
+.c-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.c-badge.ok{background:rgba(76,175,80,0.10);color:#4CAF50}
+.c-badge.warn{background:rgba(255,152,0,0.10);color:#FF9800}
+.c-badge.err{background:var(--red-light);color:var(--red-primary)}
+.c-info{flex:1;min-width:0}
+.c-info .lbl{font-size:13px;font-weight:600;margin-bottom:1px}
+.c-info .dsc{font-size:12px;color:var(--text-secondary)}
+.c-info .bar{height:3px;background:var(--border-faint);border-radius:2px;margin-top:6px;overflow:hidden}
+.c-info .bar .fill{height:100%;border-radius:2px;transition:width 0.6s}
+.c-info .bar .fill.ok{background:#4CAF50}
+.c-info .bar .fill.warn{background:#FF9800}
+.c-info .bar .fill.err{background:var(--red-primary)}
+.create-content{padding:16px}
+.create-subtabs{display:flex;gap:6px;background:var(--bg-card);border:1px solid var(--border-faint);border-radius:var(--radius-sm);padding:4px;margin-bottom:16px}
+.create-subtab{flex:1;padding:10px 0;text-align:center;border-radius:6px;font-size:13px;color:var(--text-secondary);transition:all 0.2s;cursor:pointer}
+.create-subtab.active{background:linear-gradient(135deg,var(--gold-primary),#b8983a);color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(201,168,76,0.25)}
+.create-panel{display:none}
+.create-panel.active{display:block}
+.create-panel .panel-hd{margin-bottom:16px}
+.create-panel .panel-hd h3{font-family:var(--font-serif);font-size:18px;letter-spacing:1px;margin-bottom:2px}
+.create-panel .panel-hd p{font-size:12px;color:var(--text-secondary)}
+.c-field{margin-bottom:16px}
+.c-field label{display:block;font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text-primary)}
+.c-field textarea{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-page);font-size:14px;color:var(--text-primary);resize:vertical;min-height:80px;transition:border-color 0.25s}
+.c-field textarea:focus{border-color:var(--gold-primary)}
+.c-field textarea::placeholder{color:var(--text-light)}
+.chip-group{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:6px 16px;border:1px solid var(--border);border-radius:100px;font-size:13px;color:var(--text-secondary);transition:all 0.2s;cursor:pointer}
+.chip:active{transform:scale(0.95)}
+.chip.active{background:var(--gold-primary);border-color:var(--gold-primary);color:#fff}
+.gen-btn{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px;background:linear-gradient(135deg,var(--gold-primary),#b8983a);color:#fff;border-radius:var(--radius-sm);font-size:15px;font-weight:600;transition:all 0.2s}
+.gen-btn:active{transform:scale(0.97);box-shadow:0 2px 12px rgba(201,168,76,0.3)}
+.result-box{margin-top:16px;padding:16px;background:var(--bg-page);border-radius:var(--radius-sm);border:1px dashed var(--border);min-height:64px;display:flex;align-items:center;justify-content:center;color:var(--text-light);font-size:13px;transition:all 0.3s}
+.result-box.has{border-style:solid;border-color:var(--gold-subtle);color:var(--text-primary);flex-direction:column;gap:10px}
+@media(min-width:500px){.app-container{border-radius:var(--radius-xl);max-height:812px;margin:20px auto;height:calc(100vh - 40px)}}
+@media(max-width:420px){.app-container{max-height:100vh}}
+</style>
+</head>
+<body>
+<div class="app-container" id="app">
+<div class="status-bar"><span class="time" id="statusTime">9:41</span><span class="icons">📶 ▮▮ 🔋</span></div>
+<div class="page-header"><h1 id="headerTitle">戏韵</h1></div>
+<div class="main-content" id="mainContent">
+<div class="view active" id="view-home">
+<div class="home-hero"><div class="badge">✦ 挑战杯 · 国粹传承与 AI 创新</div><div class="brand-icon">韵</div><h1>基于<span>AI</span>声腔建模</h1><p class="sub">戏曲智能化学戏与创新创作平台</p><p class="desc">智能纠错教学 + AI 戏腔创作，降低戏曲学习与创作门槛</p></div>
+<div class="section-label"><div class="line"></div><span class="text">两大核心模块 <small>传承与创新</small></span><div class="line"></div></div>
+<div class="home-cards">
+<div class="home-card" onclick="switchTab(1)"><div class="card-icon">🎭</div><div class="card-body"><span class="tag">传承为主</span><h3>AI 戏曲声腔智能纠错</h3><p>对标梅派标准声腔，智能识别跑调、气口、咬字问题，可视化音波曲线精准标注。</p></div><span class="card-arrow">›</span></div>
+<div class="home-card" onclick="switchTab(2)"><div class="card-icon">🎵</div><div class="card-body"><span class="tag">大众传播</span><h3>AI 智能戏腔创作</h3><p>文字一键生成戏腔，流行歌曲戏腔化，情绪化 BGM 自动生成。</p></div><span class="card-arrow">›</span></div>
+</div>
+<div class="section-label"><div class="line"></div><span class="text">阶梯式学习体系</span><div class="line"></div></div>
+<div class="stages-scroll">
+<div class="stage-mini"><div class="num">初</div><h4>初级 · 逐字</h4><p class="sub">戏曲特殊咬字 → 单字唱腔</p><p>从咬字开始打基础，专业学生亦可预习新剧目</p></div>
+<div class="stage-mini"><div class="num">中</div><h4>中级 · 逐句</h4><p class="sub">行腔与节奏巩固</p><p>单字组合成句，逐句练习实现量变到质变</p></div>
+<div class="stage-mini"><div class="num">高</div><h4>高级 · 跟唱</h4><p class="sub">伴奏整段成品</p><p>带入伴奏跟唱，形成完整学习成品</p></div>
+</div>
+</div>
+<div class="view" id="view-learn">
+<div class="learn-content">
+<div class="stage-selector"><div class="stage-btn active" data-s="1" onclick="pickStage(1)">初级<span class="s-sub">逐字</span></div><div class="stage-btn" data-s="2" onclick="pickStage(2)">中级<span class="s-sub">逐句</span></div><div class="stage-btn" data-s="3" onclick="pickStage(3)">高级<span class="s-sub">跟唱</span></div></div>
+<div class="wave-card"><div class="wave-header"><h3>🎤 音波分析</h3><span class="status" id="waveStatus">等待录制…</span></div><div class="wave-box" id="waveBox"><canvas id="waveCanvas"></canvas><div class="wave-placeholder" id="wavePlaceholder"><span class="icon">🎤</span><span>点击下方按钮录制</span></div></div><div class="wave-actions"><button class="btn-primary" id="recBtn" onclick="toggleRec()"><span id="recIcon">●</span> <span id="recTxt">开始录制</span></button><button class="btn-secondary" onclick="doAnalysis()">分析</button><button class="btn-secondary" onclick="resetWave()">重置</button></div></div>
+<div class="score-row"><div class="score-cell"><div class="num">86</div><div class="lbl">综合得分</div></div><div class="score-cell"><div class="num gold">92</div><div class="lbl">音准</div></div><div class="score-cell"><div class="num">78</div><div class="lbl">咬字</div></div></div>
+<div class="correction-box"><div class="c-title">📋 纠错详情</div>
+<div class="c-item"><div class="c-badge ok">✓</div><div class="c-info"><div class="lbl">音准</div><div class="dsc">整体音准良好，高音区略有偏差</div><div class="bar"><div class="fill ok" style="width:92%"></div></div></div></div>
+<div class="c-item"><div class="c-badge warn">!</div><div class="c-info"><div class="lbl">咬字 · 尖团音</div><div class="dsc">"心"字尖音略过，注意舌尖抵住上颚</div><div class="bar"><div class="fill warn" style="width:65%"></div></div></div></div>
+<div class="c-item"><div class="c-badge err">✗</div><div class="c-info"><div class="lbl">气口</div><div class="dsc">第三句换气位置靠前，建议在"腔"字后换气</div><div class="bar"><div class="fill err" style="width:45%"></div></div></div></div>
+</div></div></div>
+<div class="view" id="view-create">
+<div class="create-content">
+<div class="create-subtabs"><div class="create-subtab active" data-ct="vocal" onclick="pickCTab('vocal')">🎤 戏腔</div><div class="create-subtab" data-ct="convert" onclick="pickCTab('convert')">🔄 戏腔化</div><div class="create-subtab" data-ct="bgm" onclick="pickCTab('bgm')">🎵 BGM</div></div>
+<div class="create-panel active" id="cp-vocal"><div class="panel-hd"><h3>文字一键生成戏腔</h3><p>输入文本，AI 自动生成流派戏腔唱段</p></div><div class="c-field"><label>输入文本</label><textarea placeholder="春风拂面花满楼，一曲清歌解千愁……" id="vIn"></textarea></div><div class="c-field"><label>风格</label><div class="chip-group"><div class="chip active" onclick="pickChip(this)">梅派经典</div><div class="chip" onclick="pickChip(this)">程派婉约</div><div class="chip" onclick="pickChip(this)">荀派活泼</div><div class="chip" onclick="pickChip(this)">新国风</div></div></div><button class="gen-btn" onclick="genVocal()">✦ 生成戏腔</button><div class="result-box" id="vRes"><span>生成的戏腔将显示在这里</span></div></div>
+<div class="create-panel" id="cp-convert"><div class="panel-hd"><h3>流行歌曲戏腔化</h3><p>输入歌词，AI 重新演绎为戏曲风格</p></div><div class="c-field"><label>歌词 / 歌名</label><textarea placeholder="青花瓷 — 天青色等烟雨，而我在等你……" id="cIn"></textarea></div><div class="c-field"><label>转换风格</label><div class="chip-group"><div class="chip active" onclick="pickChip(this)">京剧化</div><div class="chip" onclick="pickChip(this)">越剧化</div><div class="chip" onclick="pickChip(this)">昆曲化</div><div class="chip" onclick="pickChip(this)">融合新编</div></div></div><button class="gen-btn" onclick="genConvert()">✦ 转换戏腔</button><div class="result-box" id="cRes"><span>转换后的戏腔将显示在这里</span></div></div>
+<div class="create-panel" id="cp-bgm"><div class="panel-hd"><h3>一键生成戏曲 BGM</h3><p>选择情绪与时长，AI 生成对应曲牌</p></div><div class="c-field"><label>情绪氛围</label><div class="chip-group"><div class="chip" onclick="pickChip(this)">温柔</div><div class="chip active" onclick="pickChip(this)">激昂</div><div class="chip" onclick="pickChip(this)">典雅</div><div class="chip" onclick="pickChip(this)">幽怨</div></div></div><div class="c-field"><label>时长</label><div class="chip-group"><div class="chip" onclick="pickChip(this)">30s</div><div class="chip active" onclick="pickChip(this)">60s</div><div class="chip" onclick="pickChip(this)">120s</div></div></div><button class="gen-btn" onclick="genBGM()">✦ 生成 BGM</button><div class="result-box" id="bRes"><span>生成的 BGM 将显示在这里</span></div></div>
+</div></div></div>
+<div class="tab-bar"><div class="tab-item active" data-tab="0" onclick="switchTab(0)"><span class="tab-icon">🏠</span><span class="tab-label">首页</span></div><div class="tab-item" data-tab="1" onclick="switchTab(1)"><span class="tab-icon">🎭</span><span class="tab-label">学戏</span></div><div class="tab-item" data-tab="2" onclick="switchTab(2)"><span class="tab-icon">🎵</span><span class="tab-label">创戏</span></div></div>
+</div>
+<script>
+const PAGE_NAMES=['戏韵','智能学戏','AI 创戏'];
+function switchTab(i){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));document.getElementById('view-'+['home','learn','create'][i]).classList.add('active');document.querySelector('.tab-item[data-tab="'+i+'"]').classList.add('active');document.getElementById('headerTitle').textContent=PAGE_NAMES[i];document.getElementById('mainContent').scrollTop=0}
+function pickStage(n){document.querySelectorAll('.stage-btn').forEach(b=>b.classList.remove('active'));document.querySelector('.stage-btn[data-s="'+n+'"]').classList.add('active');resetWave()}
+const c=document.getElementById('waveCanvas'),x=c.getContext('2d');let rec=0,aid=null,wo=0;
+function rw(){const r=c.parentElement.getBoundingClientRect();c.width=r.width;c.height=r.height}
+function dw(r){const w=c.width,h=c.height;x.clearRect(0,0,w,h);if(!r){x.beginPath();x.strokeStyle='rgba(196,58,49,0.25)';x.lineWidth=2;for(let i=0;i<w;i++){const y=h/2+Math.sin((i+wo)*0.03)*16+Math.sin((i+wo)*0.07)*8;i===0?x.moveTo(i,y):x.lineTo(i,y)}x.stroke();return}const bc=Math.floor(w/5);x.fillStyle='rgba(196,58,49,0.65)';for(let i=0;i<bc;i++){const a=(Math.random()*0.5+0.5)*50;x.fillRect(i*5+1,h/2-a/2,2.5,a)}}
+function aw(r){wo+=r?2:0.3;dw(r);aid=requestAnimationFrame(()=>aw(r))}
+window.addEventListener('load',()=>{rw();aw(0)});window.addEventListener('resize',rw);
+function toggleRec(){rec=!rec;const b=document.getElementById('recBtn'),ic=document.getElementById('recIcon'),tx=document.getElementById('recTxt'),st=document.getElementById('waveStatus'),ph=document.getElementById('wavePlaceholder');if(rec){b.classList.add('recording');ic.textContent='◼';tx.textContent='停止';st.textContent='录制中…';ph.style.display='none'}else{b.classList.remove('recording');ic.textContent='●';tx.textContent='开始录制';st.textContent='录制完成'}if(aid)cancelAnimationFrame(aid);aw(rec)}
+function resetWave(){if(rec)toggleRec();document.getElementById('waveStatus').textContent='等待录制…';document.getElementById('wavePlaceholder').style.display='flex';wo=0;if(aid)cancelAnimationFrame(aid);aw(0)}
+function doAnalysis(){const st=document.getElementById('waveStatus');st.textContent='分析中…';if(rec)toggleRec();setTimeout(()=>{st.textContent='分析完成';const ns=document.querySelectorAll('.score-cell .num');if(ns.length>=3){ns[0].textContent=Math.floor(70+Math.random()*25);ns[1].textContent=Math.floor(70+Math.random()*25);ns[2].textContent=Math.floor(60+Math.random()*30)}},1200)}
+function pickCTab(t){document.querySelectorAll('.create-subtab').forEach(e=>e.classList.remove('active'));document.querySelector('.create-subtab[data-ct="'+t+'"]').classList.add('active');document.querySelectorAll('.create-panel').forEach(p=>p.classList.remove('active'));document.getElementById('cp-'+t).classList.add('active')}
+function pickChip(el){el.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active')}
+function genVocal(){const i=document.getElementById('vIn').value.trim(),r=document.getElementById('vRes');if(!i){r.innerHTML='<span style="color:var(--red-primary)">⚠ 请输入文本</span>';return}r.className='result-box has';r.innerHTML='<div style="display:flex;align-items:center;gap:10px;width:100%"><span style="font-size:26px;color:var(--red-primary)">🎭</span><div style="flex:1"><div style="font-weight:600;font-size:14px">戏腔生成完成</div><div style="font-size:12px;color:var(--text-secondary)">已生成梅派风格戏腔唱段</div></div><button style="padding:7px 18px;background:var(--red-primary);color:#fff;border-radius:6px;font-size:12px;font-weight:600" onclick="this.textContent=\'▶ 播放\';this.style.opacity=\'0.7\'">▶ 试听</button></div>'}
+function genConvert(){const i=document.getElementById('cIn').value.trim(),r=document.getElementById('cRes');if(!i){r.innerHTML='<span style="color:var(--red-primary)">⚠ 请输入歌曲信息</span>';return}r.className='result-box has';r.innerHTML='<div style="display:flex;align-items:center;gap:10px;width:100%"><span style="font-size:26px;color:var(--gold-primary)">🔄</span><div style="flex:1"><div style="font-weight:600;font-size:14px">转换完成</div><div style="font-size:12px;color:var(--text-secondary)">京剧化版本 · 融入度 85%</div></div><button style="padding:7px 18px;background:var(--gold-primary);color:#fff;border-radius:6px;font-size:12px;font-weight:600" onclick="this.textContent=\'▶ 播放\';this.style.opacity=\'0.7\'">▶ 试听</button></div>'}
+function genBGM(){const r=document.getElementById('bRes');r.className='result-box has';r.innerHTML='<div style="display:flex;align-items:center;gap:10px;width:100%"><span style="font-size:26px;color:var(--gold-primary)">🎵</span><div style="flex:1"><div style="font-weight:600;font-size:14px">BGM 生成完成</div><div style="font-size:12px;color:var(--text-secondary)">激昂 · 60秒 · 对应《夜深沉》</div></div><button style="padding:7px 18px;background:var(--gold-primary);color:#fff;border-radius:6px;font-size:12px;font-weight:600" onclick="this.textContent=\'▶ 播放\';this.style.opacity=\'0.7\'">▶ 试听</button></div><div style="width:100%;height:4px;background:var(--border-faint);border-radius:2px;overflow:hidden"><div style="height:100%;width:100%;background:linear-gradient(90deg,var(--gold-primary),var(--red-primary));border-radius:2px;animation:prog 60s linear"></div></div>'}
+function updateClock(){const d=new Date();document.getElementById('statusTime').textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+updateClock();setInterval(updateClock,30000);
+</script>
+<style>@keyframes prog{0%{width:0%}100%{width:100%}}</style>
+</body>
+</html>
