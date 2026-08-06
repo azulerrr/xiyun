@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>戏韵 AI — 声韵智能 传承与创新</title>
 <style>
-/* ============ 设计令牌 ============ */
+/* ===== 设计令牌 ===== */
 :root{
   --primary:#6B131D;--primary-dark:#4C0C13;--primary-light:#8E2A33;
   --bg:#F8F3E9;--card:#FFFFFF;--card-alt:#F0EAE1;
@@ -23,51 +23,35 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 input,textarea{font-family:inherit;outline:none;border:none}
 .phone{width:100%;max-width:420px;height:100vh;max-height:900px;background:var(--bg);position:relative;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,.4);display:flex;flex-direction:column}
 @media(min-width:500px){.phone{border-radius:28px;height:calc(100vh - 32px);margin:16px auto}}
-.statusbar{height:26px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;font-size:11px;font-weight:600;color:var(--text);flex-shrink:0;position:relative;z-index:20}
 .main{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 .page{display:none;min-height:100%;padding-bottom:74px}
 .page.active{display:block}
 
-/* 宣纸纹理 */
-.paper::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
-  background:radial-gradient(ellipse at 20% 0%,rgba(201,168,76,.10),transparent 45%),
-  radial-gradient(ellipse at 85% 30%,rgba(107,19,29,.05),transparent 40%),
-  radial-gradient(ellipse at 40% 100%,rgba(201,168,76,.08),transparent 50%)}
-.page>*{position:relative;z-index:1}
-
-/* ============ 启动页 ============ */
+/* ===== 启动页 ===== */
 .splash{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;transition:opacity .6s}
 .splash.hide{opacity:0;pointer-events:none}
 .splash .ink{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.14),rgba(107,19,29,.04) 55%,transparent 72%)}
-.splash .ink2{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(107,19,29,.05),transparent 70%)}
-.emblem{width:128px;height:128px;border-radius:50%;background:linear-gradient(160deg,#FFF7E4,#F1E2BE);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(107,19,29,.18),inset 0 0 0 1px rgba(201,168,76,.45);position:relative;margin-bottom:26px}
+.emblem{width:128px;height:128px;border-radius:50%;background:linear-gradient(160deg,#FFF7E4,#F1E2BE);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(107,19,29,.18),inset 0 0 0 1px rgba(201,168,76,.45);font-family:var(--kai);font-size:52px;color:var(--primary);position:relative;margin-bottom:26px}
 .emblem::after{content:'';position:absolute;inset:7px;border-radius:50%;border:1px dashed rgba(201,168,76,.65)}
-.emblem{font-family:var(--kai);font-size:52px;color:var(--primary);letter-spacing:2px}
 .app-ic{width:58px;height:58px;border-radius:16px;background:linear-gradient(140deg,#8E2A33,#4C0C13);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(107,19,29,.32);margin-bottom:16px}
 .app-ic svg{width:34px;height:34px}
-.splash h1{font-family:var(--kai);font-size:34px;letter-spacing:6px;color:var(--primary);margin-bottom:8px;text-shadow:0 1px 0 rgba(255,255,255,.7)}
+.splash h1{font-family:var(--kai);font-size:34px;letter-spacing:6px;color:var(--primary);margin-bottom:8px}
 .splash .slogan{font-size:13px;color:var(--text-2);letter-spacing:3px}
 .splash .bar{position:absolute;bottom:112px;width:120px;height:3px;border-radius:2px;background:#E8DFCE;overflow:hidden}
 .splash .bar i{display:block;height:100%;width:0;background:var(--primary);border-radius:2px;animation:ld 1.8s ease forwards}
 @keyframes ld{to{width:100%}}
 
-/* ============ 通用头 ============ */
+/* ===== 通用头 ===== */
 .head{height:52px;background:var(--primary);display:flex;align-items:center;justify-content:space-between;padding:0 16px;color:#fff;position:relative;overflow:hidden}
-.head::after{content:'';position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(105deg,transparent 30%,rgba(232,213,163,.14) 46%,transparent 58%)}
+.head::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 30%,rgba(232,213,163,.14) 46%,transparent 58%)}
 .head h2{font-size:18px;font-weight:700;letter-spacing:1px;position:relative;z-index:1}
-.head .l,.head .r{display:flex;align-items:center;gap:10px;position:relative;z-index:1}
-.head .r{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
+.head .back{width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;cursor:pointer;position:relative;z-index:1}
+.head .r{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
 .head .r svg{width:17px;height:17px;fill:#fff}
-.head .back{width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff}
 .head.create{background:linear-gradient(130deg,#4C0C13 0%,#7E1B26 55%,#9A2A36 100%)}
 .head.create h2{font-family:var(--kai);font-size:22px;letter-spacing:5px}
-.head .deco{position:absolute;right:52px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:4px;z-index:1}
-.head .deco .ln{width:14px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--gold-l));opacity:.95}
-.head .deco .ln:nth-child(2){width:24px}
-.head .deco .nt{font-size:12px;color:var(--gold-l);line-height:1}
 
-/* ============ Tab 栏 ============ */
+/* ===== Tab 栏 ===== */
 .tabbar{position:absolute;left:0;right:0;bottom:0;height:64px;background:rgba(248,243,233,.96);backdrop-filter:blur(10px);border-top:1px solid #EBE2D2;display:flex;align-items:stretch;padding-bottom:env(safe-area-inset-bottom,0);z-index:50}
 .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--text-3);cursor:pointer;-webkit-tap-highlight-color:transparent;position:relative}
 .tab svg{width:21px;height:21px;fill:currentColor}
@@ -77,120 +61,140 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .tab.c{position:relative}
 .tab.c .bub{position:absolute;top:-26px;left:50%;transform:translateX(-50%);width:56px;height:56px;border-radius:50%;background:linear-gradient(145deg,#8E2A33,#4C0C13);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(107,19,29,.38);border:3px solid var(--bg)}
 .tab.c .bub svg{width:30px;height:30px;fill:#fff}
+.tab.c span{margin-top:34px}
+.tab.c.active::before{display:none}
 
-/* ============ 首页 ============ */
-.home-head{background:var(--primary);padding:12px 16px 14px;color:#fff;position:relative;overflow:hidden}
-.home-head::before{content:'';position:absolute;right:-30px;top:-40px;width:150px;height:150px;border-radius:50%;border:1px solid rgba(232,213,163,.18)}
-.home-head::after{content:'';position:absolute;right:-10px;top:-20px;width:90px;height:90px;border-radius:50%;border:1px solid rgba(232,213,163,.12)}
-.home-head .row{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
-.home-head h2{font-family:var(--kai);font-size:24px;letter-spacing:3px}
-.home-head .s{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center}
-.home-head .s svg{width:16px;height:16px;fill:#fff}
-.rec{margin:16px 16px 0}
-.rec-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.rec-top .t{font-size:15px;font-weight:700;display:flex;align-items:center;gap:4px}
-.rec-top .t i{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--text);margin-top:3px}
-.rec-top .pill{font-size:12px;color:var(--text-2);background:var(--card);border-radius:var(--r12);padding:3px 10px}
-.rec-scroll{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:6px}
-.rec-scroll::-webkit-scrollbar{display:none}
-.rec-card{flex:0 0 214px;border-radius:var(--r16);overflow:hidden;background:var(--card);box-shadow:0 3px 14px rgba(43,27,23,.07)}
-.rec-card .art{height:132px;position:relative;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#FDF6E6,#EFE1C2)}
-.rec-card .art .art-note{font-size:40px;color:rgba(107,19,29,.30)}
-.rec-card .art .mt{position:absolute;left:10px;top:10px;background:var(--primary);color:#fff;font-size:10px;padding:2px 9px;border-radius:100px}
-.rec-card .txt{padding:10px 12px}
-.rec-card .txt b{font-size:13px;display:block;margin-bottom:2px}
-.rec-card .txt small{font-size:11px;color:var(--text-2)}
-.dots{display:flex;justify-content:center;gap:5px;margin:12px 0 4px}
-.dots i{width:5px;height:5px;border-radius:50%;background:#D8CCB8}
-.dots i.on{width:15px;border-radius:3px;background:var(--primary)}
-.fn{padding:14px 16px 20px}
-.fn-grid{display:flex;gap:10px;margin-bottom:10px}
-.fn-card{flex:1;border-radius:var(--r16);background:var(--card);overflow:hidden;box-shadow:0 3px 12px rgba(43,27,23,.06)}
-.fn-card .art{height:78px;background:linear-gradient(160deg,#FBF3E0,#EFE1C0);display:flex;align-items:center;justify-content:center;position:relative}
-.fn-card .art .art-note{font-family:var(--kai);font-size:34px;color:rgba(107,19,29,.28)}
-.fn-card .t{padding:10px 12px}
-.fn-card .t b{font-size:13px;display:block}
-.fn-card .t small{font-size:10px;color:var(--text-2)}
-.fn-wide{border-radius:var(--r16);background:var(--card);overflow:hidden;box-shadow:0 3px 12px rgba(43,27,23,.06);display:flex;align-items:center;justify-content:space-between;padding:12px 14px}
-.fn-wide .lt{display:flex;align-items:center;gap:12px}
-.fn-wide .art{width:56px;height:56px;border-radius:12px;background:linear-gradient(150deg,#FBF3E0,#EFE1C0);display:flex;align-items:center;justify-content:center;position:relative}
-.fn-wide .art .art-note{font-family:var(--kai);font-size:24px;color:rgba(107,19,29,.30)}
-.fn-wide b{font-size:14px;display:block}
-.fn-wide small{font-size:11px;color:var(--text-2)}
-.fn-wide .more{font-size:11px;color:var(--text-2);background:var(--bg);border-radius:100px;padding:5px 12px}
+/* ===== 通用卡片 / 区块 ===== */
+.sec-title{display:flex;justify-content:space-between;align-items:baseline;margin:16px 16px 10px}
+.sec-title b{font-size:15px;font-weight:700;font-family:var(--song);letter-spacing:1px}
+.sec-title small{font-size:11px;color:var(--text-2)}
+.card{background:var(--card);border-radius:var(--r16);box-shadow:0 3px 14px rgba(43,27,23,.07);margin:0 16px 12px}
 
-/* 印章图形（统一徽章） */
-.seal{width:76px;height:76px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:inset 0 0 0 2px rgba(255,255,255,.5),0 4px 12px rgba(43,27,23,.12)}
-.seal::before{content:'';position:absolute;inset:5px;border-radius:50%;border:1px dashed rgba(255,255,255,.55)}
-.seal b{font-family:var(--kai);font-size:34px;font-weight:400;color:#fff;position:relative;z-index:1;text-shadow:0 1px 3px rgba(0,0,0,.18)}
-.seal.s1{background:linear-gradient(145deg,#D98E8E,#B84A52)}
-.seal.s2{background:linear-gradient(145deg,#8E2A33,#4C0C13)}
-.seal.s3{background:linear-gradient(145deg,#3E3A36,#1E1A17)}
-.seal.s4{background:linear-gradient(145deg,#C9A84C,#8E6B2C)}
-.seal.sm{width:64px;height:64px}
-.seal.sm b{font-size:28px}
+/* ===== 首页 ===== */
+.hero{margin:14px 16px 4px;border-radius:20px;background:linear-gradient(135deg,#7E1B26 0%,#4C0C13 75%);color:#fff;padding:22px 18px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-46px;top:-70px;width:190px;height:190px;border-radius:50%;border:1px solid rgba(232,213,163,.25)}
+.hero::after{content:'';position:absolute;right:-18px;top:-34px;width:120px;height:120px;border-radius:50%;border:1px solid rgba(232,213,163,.16)}
+.hero .brand{font-family:var(--kai);font-size:24px;letter-spacing:3px;position:relative;z-index:1}
+.hero .slogan{font-size:14px;margin-top:2px;opacity:.92;position:relative;z-index:1}
+.hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;position:relative;z-index:1}
+.hero .chip{font-size:12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:100px;padding:4px 12px}
+.mods{padding:6px 16px 10px}
+.mod{display:flex;align-items:center;gap:14px;padding:16px;margin-bottom:12px;border-radius:var(--r16);background:var(--card);box-shadow:0 3px 14px rgba(43,27,23,.07);cursor:pointer;position:relative;overflow:hidden}
+.mod:active{transform:scale(.98)}
+.mod::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.mod.m1::before{background:var(--primary)}
+.mod.m2::before{background:var(--gold)}
+.mod.m3::before{background:#8E6B4F}
+.mod .ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mod .ic svg{width:24px;height:24px;fill:#fff}
+.mod.m1 .ic{background:linear-gradient(145deg,#8E2A33,#4C0C13)}
+.mod.m2 .ic{background:linear-gradient(145deg,#D9B85E,#8E6B2C)}
+.mod.m3 .ic{background:linear-gradient(145deg,#A08A70,#6B5540)}
+.mod .info{flex:1;min-width:0}
+.mod .info b{font-size:15px;display:block}
+.mod .info small{font-size:11px;color:var(--text-2)}
+.mod .tags{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.mod .tags i{font-style:normal;font-size:10px;background:var(--bg);color:var(--text-2);border-radius:100px;padding:2px 8px}
+.mod .arr{color:var(--text-3);font-size:18px}
+.stats{display:flex;background:var(--card);border-radius:var(--r16);margin:4px 16px 14px;box-shadow:0 3px 14px rgba(43,27,23,.07);padding:14px 0}
+.stats .st{flex:1;text-align:center}
+.stats .st b{font-size:16px;font-family:var(--song);display:block}
+.stats .st small{font-size:10px;color:var(--text-2)}
 
-/* ============ 学戏 ============ */
-.lt{margin:14px 16px 10px}
-.lt h3{font-family:var(--kai);font-size:24px;letter-spacing:1px}
-.lt span{font-size:12px;color:var(--text-2)}
-.wave-card{margin:0 16px 14px;border-radius:var(--r16);background:var(--card);padding:14px;box-shadow:0 3px 14px rgba(43,27,23,.07)}
+/* ===== 学戏（教学辅助） ===== */
+.ladder{padding:16px;display:flex;align-items:center;justify-content:space-between}
+.ladder .node{display:flex;flex-direction:column;align-items:center;gap:6px}
+.ladder .node .dot{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--kai);font-size:18px;background:var(--card-alt);color:var(--text-2)}
+.ladder .node.on .dot{background:var(--primary);color:#fff;box-shadow:0 4px 10px rgba(107,19,29,.28)}
+.ladder .node small{font-size:11px;color:var(--text-2)}
+.ladder .node.on small{color:var(--primary);font-weight:600}
+.ladder .line{flex:1;height:2px;background:var(--border-faint,#ECE2D2);margin:0 8px;position:relative;top:-16px}
+.ladder .line i{position:absolute;left:0;top:0;height:2px;background:var(--primary);border-radius:2px}
+.stage-desc{margin:-4px 16px 12px;font-size:12px;color:var(--text-2);padding:0 4px}
+.stage-desc b{color:var(--primary)}
+.cats{display:flex;gap:6px;background:var(--card);border-radius:var(--r16);margin:0 16px 12px;padding:4px;box-shadow:0 2px 8px rgba(43,27,23,.05)}
+.cat{flex:1;padding:9px 0;text-align:center;border-radius:12px;font-size:13px;color:var(--text-2);cursor:pointer}
+.cat.active{background:var(--primary);color:#fff;font-weight:600}
+.list{display:none;padding:0 4px}
+.list.on{display:block}
+.li{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #F4EEE2}
+.li:last-child{border-bottom:none}
+.li .badge{width:36px;height:36px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:var(--kai);font-size:16px;color:var(--primary);flex-shrink:0}
+.li .in{flex:1;min-width:0}
+.li .in b{font-size:13px;display:block}
+.li .in small{font-size:11px;color:var(--text-2)}
+.li .arr{color:var(--text-3)}
+.wave-card{padding:14px}
 .wc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .wc-top b{font-size:13px}
 .wc-top small{font-size:11px;color:var(--text-2)}
-.wave-box{height:150px;border-radius:12px;background:linear-gradient(180deg,#241A16,#1A100C);position:relative;overflow:hidden}
+.wave-box{height:140px;border-radius:12px;background:linear-gradient(180deg,#241A16,#1A100C);position:relative;overflow:hidden}
 .wave-box canvas{width:100%;height:100%}
 .legend{display:flex;gap:14px;margin-top:8px;font-size:10px;color:var(--text-2)}
 .legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:4px;vertical-align:middle}
-.lb{margin:0 16px 14px;border-radius:var(--r16);background:var(--card);padding:12px;box-shadow:0 3px 14px rgba(43,27,23,.07)}
+.lb-card{padding:12px 14px}
 .lb-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .lb-top b{font-size:13px}
-.lb-top small{font-size:11px;color:var(--text-2)}
-.ls{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.ls{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
 .ls::-webkit-scrollbar{display:none}
 .lw{flex:0 0 auto;padding:6px 14px;border-radius:100px;background:var(--bg);font-size:13px;color:var(--text-2)}
-.lw.now{background:var(--text);color:#fff;font-weight:600;box-shadow:0 3px 8px rgba(43,27,23,.3)}
-.diag{margin:0 16px 16px;border-radius:var(--r16);background:var(--card);padding:14px;box-shadow:0 3px 14px rgba(43,27,23,.07)}
-.diag .dt{font-size:13px;font-weight:700;margin-bottom:10px}
-.d-it{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #F3ECDF}
+.lw.now{background:var(--text);color:#fff;font-weight:600}
+.diag-card{padding:14px}
+.diag-card .dt{font-size:13px;font-weight:700;margin-bottom:10px}
+.d-it{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #F4EEE2}
 .d-it:last-child{border-bottom:none}
 .d-it .lbl{font-size:13px}
 .d-it .lbl small{color:var(--text-2);margin-left:4px;font-size:11px}
 .d-it .ic{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
 .d-it .ic.ok{background:var(--ok)}
 .d-it .ic.err{background:var(--err)}
-.rec-btn{display:block;margin:4px 16px 20px;padding:14px;border-radius:var(--r24);background:linear-gradient(135deg,#8E2A33,#4C0C13);color:#fff;font-size:15px;font-weight:600;text-align:center;box-shadow:0 6px 18px rgba(107,19,29,.28)}
+.rec-btn{display:block;margin:0 16px 12px;padding:13px;border-radius:var(--r24);background:linear-gradient(135deg,#8E2A33,#4C0C13);color:#fff;font-size:15px;font-weight:600;text-align:center;box-shadow:0 6px 18px rgba(107,19,29,.28)}
 .rec-btn:active{transform:scale(.97)}
+.his{padding:4px 0}
+.hi{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #F4EEE2}
+.hi:last-child{border-bottom:none}
+.hi .date{width:44px;text-align:center;flex-shrink:0}
+.hi .date b{font-size:14px;font-family:var(--song);display:block}
+.hi .date small{font-size:9px;color:var(--text-2)}
+.hi .in{flex:1;min-width:0}
+.hi .in b{font-size:13px;display:block}
+.hi .in .bar{height:3px;border-radius:2px;background:var(--border-faint,#F0E7D8);margin-top:5px;overflow:hidden}
+.hi .in .bar i{display:block;height:100%;border-radius:2px;background:var(--gold)}
+.hi .score{font-size:13px;font-weight:700;font-family:var(--song);color:var(--primary)}
+.hi .st2{font-size:10px;color:var(--text-2);text-align:center}
+.hi .st2.g{color:var(--ok)}
 
-/* ============ 创作 ============ */
-.cb{padding:16px}
-.cc{border-radius:var(--r16);background:var(--card);padding:16px;margin-bottom:16px;box-shadow:0 3px 14px rgba(43,27,23,.07)}
+/* ===== 创作 ===== */
+.cb{padding:0 16px}
+.cc{padding:16px;margin-bottom:12px}
+.cp{display:none}
+.cp.on{display:block}
 .cc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .cc-top b{font-size:16px;font-weight:800;font-family:var(--song)}
-.cc-top small{font-size:11px;color:var(--text-2)}
-.cc-ta{width:100%;min-height:88px;border-radius:12px;background:var(--card-alt);padding:12px;font-size:13px;color:var(--text);resize:none}
+.cc-top .flag{font-size:10px;color:#fff;background:var(--gold);border-radius:100px;padding:2px 8px}
+.cc-ta{width:100%;min-height:78px;border-radius:12px;background:var(--card-alt);padding:12px;font-size:13px;color:var(--text);resize:none}
 .cc-ta::placeholder{color:var(--text-3)}
 .style-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
 .style-chip{padding:5px 14px;border-radius:100px;background:var(--card-alt);font-size:12px;color:var(--text-2);cursor:pointer}
 .style-chip.active{background:var(--primary);color:#fff}
 .gen{display:block;width:100%;padding:12px;border-radius:var(--r24);background:linear-gradient(135deg,#8E2A33,#4C0C13);color:#fff;font-size:14px;font-weight:600;text-align:center}
+.gen.gold{background:linear-gradient(135deg,#D9B85E,#8E6B2C)}
 .gen:active{transform:scale(.97)}
 .cv-row{display:flex;align-items:center;gap:12px}
+.cv-row .ic{width:52px;height:52px;border-radius:14px;background:linear-gradient(145deg,#D9B85E,#8E6B2C);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cv-row .ic svg{width:26px;height:26px;fill:#fff}
 .cv-row .info{flex:1}
 .cv-row .info b{font-size:14px;display:block}
 .cv-row .info small{font-size:11px;color:var(--text-2)}
-.cv-row .mini{padding:8px 18px;border-radius:var(--r24);background:var(--primary);color:#fff;font-size:13px;font-weight:600}
-.chars{display:flex;justify-content:space-around;align-items:center;padding:14px 16px;margin:0 16px 0;border-radius:var(--r16);background:linear-gradient(160deg,#FBF3E0,#F0E2C4)}
-.chars span{font-family:var(--kai);font-size:24px;color:var(--primary);letter-spacing:6px}
 
-/* ============ 社群 ============ */
+/* ===== 社群 ===== */
 .cs{margin:14px 16px 10px}
 .search{display:flex;align-items:center;gap:8px;background:var(--card);border-radius:100px;padding:9px 14px;font-size:13px;color:var(--text-3);box-shadow:0 2px 8px rgba(43,27,23,.05)}
 .search svg{width:15px;height:15px;fill:var(--text-3)}
 .fr{display:flex;gap:8px;margin:0 16px 14px}
-.fchip{font-size:12px;color:var(--text-2);background:var(--card);border-radius:100px;padding:5px 14px;display:flex;align-items:center;gap:3px;box-shadow:0 2px 6px rgba(43,27,23,.04)}
+.fchip{font-size:12px;color:var(--text-2);background:var(--card);border-radius:100px;padding:5px 14px;box-shadow:0 2px 6px rgba(43,27,23,.04)}
 .feed{padding:0 16px}
-.fcard{border-radius:var(--r16);background:var(--card);padding:14px;margin-bottom:12px;box-shadow:0 3px 14px rgba(43,27,23,.07)}
+.fcard{padding:14px;margin-bottom:12px}
 .fu{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .fu .ava{width:38px;height:38px;border-radius:50%;background:linear-gradient(140deg,#B84A52,#6B131D);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
 .fu .un{font-size:13px;font-weight:600}
@@ -198,8 +202,8 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .fu .dt{margin-left:auto;color:var(--text-3);font-size:16px;letter-spacing:2px}
 .ft{font-size:13px;margin-bottom:10px}
 .fm{display:flex;gap:10px;margin-bottom:10px}
-.fimg{flex:1;border-radius:10px;background:linear-gradient(150deg,#FDF0DA,#EEDCB8);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.fimg .art-note{font-family:var(--kai);font-size:28px;color:rgba(107,19,29,.25)}
+.fimg{flex:1;border-radius:10px;background:linear-gradient(150deg,#FDF0DA,#EEDCB8);display:flex;align-items:center;justify-content:center;min-height:88px}
+.fimg span{font-family:var(--kai);font-size:28px;color:rgba(107,19,29,.25)}
 .faudio{flex:1;border-radius:10px;background:#221512;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px}
 .faudio .play{width:34px;height:34px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
 .faudio .wl{display:flex;align-items:center;gap:3px;height:20px}
@@ -216,18 +220,17 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .post-input::placeholder{color:var(--text-3)}
 .post-btn{padding:0 20px;border-radius:100px;background:var(--primary);color:#fff;font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(107,19,29,.25)}
 
-/* ============ 我的 ============ */
+/* ===== 我的 ===== */
 .ph{background:linear-gradient(160deg,#7E1B26,#4C0C13);color:#fff;padding:22px 16px 40px;text-align:center;position:relative;overflow:hidden}
 .ph::before{content:'';position:absolute;right:-40px;top:-60px;width:200px;height:200px;border-radius:50%;border:1px solid rgba(232,213,163,.2)}
-.ph .ava{width:76px;height:76px;border-radius:50%;margin:0 auto 10px;background:linear-gradient(150deg,#FFF3D8,#E8D0A0);display:flex;align-items:center;justify-content:center;border:3px solid rgba(255,255,255,.4);box-shadow:0 6px 18px rgba(0,0,0,.25);position:relative;z-index:1}
-.ph .ava{font-family:var(--kai);font-size:34px;color:var(--primary)}
+.ph .ava{width:76px;height:76px;border-radius:50%;margin:0 auto 10px;background:linear-gradient(150deg,#FFF3D8,#E8D0A0);display:flex;align-items:center;justify-content:center;border:3px solid rgba(255,255,255,.4);box-shadow:0 6px 18px rgba(0,0,0,.25);font-family:var(--kai);font-size:34px;color:var(--primary);position:relative;z-index:1}
 .ph .nick{font-size:18px;font-weight:700;margin-bottom:12px;font-family:var(--kai);letter-spacing:2px;position:relative;z-index:1}
 .pstats{display:flex;justify-content:center;gap:34px;position:relative;z-index:1}
 .pstats .st{text-align:center}
 .pstats .st b{font-size:17px;font-weight:800;display:block}
 .pstats .st small{font-size:11px;opacity:.78}
 .arc{width:100%;height:36px;display:block;margin-top:-6px;position:relative;z-index:2}
-.pm{margin:-14px 16px 20px;border-radius:var(--r16);background:var(--card);box-shadow:0 3px 16px rgba(43,27,23,.08);overflow:hidden;position:relative;z-index:3}
+.pm{margin:-14px 16px 20px;padding:4px 0;position:relative;z-index:3}
 .mi{display:flex;align-items:center;gap:12px;padding:15px 16px;border-bottom:1px solid #F4EEE2;font-size:14px}
 .mi:last-child{border-bottom:none}
 .mi .ic{width:30px;height:30px;border-radius:9px;background:var(--bg);display:flex;align-items:center;justify-content:center}
@@ -235,137 +238,179 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .mi .arr{margin-left:auto;color:var(--text-3);font-size:16px}
 
 @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.page.active .rec,.page.active .fn,.page.active .wave-card,.page.active .lb,.page.active .diag,.page.active .cc,.page.active .fcard,.page.active .pm{animation:up .4s ease both}
-.page.active .fn{animation-delay:.12s}
-.page.active .lb{animation-delay:.12s}
-.page.active .diag{animation-delay:.19s}
-.page.active .cc:nth-child(2){animation-delay:.08s}
-.page.active .fcard:nth-child(2){animation-delay:.12s}
+.page.active .hero,.page.active .mods,.page.active .stats,.page.active .ladder,.page.active .cats,.page.active .card,.page.active .feed,.page.active .fcard,.page.active .pm{animation:up .4s ease both}
+.page.active .mods{animation-delay:.1s}
+.page.active .cats{animation-delay:.08s}
+.page.active .card{animation-delay:.12s}
 </style>
 </head>
-<body class="paper">
+<body>
 
-<!-- ===== 启动页 ===== -->
 <div class="splash" id="splash">
-  <div class="ink"></div><div class="ink2"></div>
+  <div class="ink"></div>
   <div class="emblem">韵</div>
-  <div class="app-ic">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 14.5a4 4 0 0 0 4-4V7a4 4 0 0 0-8 0v3.5a4 4 0 0 0 4 4z" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
-      <path d="M7.5 10.5a4.5 4.5 0 0 0 9 0M12 14.5V21M9.5 21h5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
-      <path d="M2.5 5.5h4M2.5 9h2.8M17.5 5.5h4M19.2 9H21.5M4.5 14h1.6M18 14h1.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
-    </svg>
-  </div>
+  <div class="app-ic"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 14.5a4 4 0 0 0 4-4V7a4 4 0 0 0-8 0v3.5a4 4 0 0 0 4 4z" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
+    <path d="M7.5 10.5a4.5 4.5 0 0 0 9 0M12 14.5V21M9.5 21h5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
+    <path d="M2.5 5.5h4M2.5 9h2.8M17.5 5.5h4M19.2 9H21.5M4.5 14h1.6M18 14h1.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+  </svg></div>
   <h1>戏韵 AI</h1>
   <p class="slogan">声韵智能 · 传承与创新</p>
   <div class="bar"><i></i></div>
 </div>
 
 <div class="phone">
-  <div class="statusbar"><span>8:41</span><span>▂▄▆ ▉</span></div>
   <div class="main" id="main">
 
-    <!-- 首页 -->
+    <!-- ===== 首页（总览入口） ===== -->
     <div class="page active" id="page-home">
-      <div class="home-head">
-        <div class="row"><h2>学戏</h2><div class="s"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg></div></div>
+      <div class="hero">
+        <div class="brand">戏韵 AI</div>
+        <div class="slogan">人人皆可唱戏 · 人人皆可创戏</div>
+        <div class="chips"><span class="chip">歌曲转戏腔</span><span class="chip">AI 生成伴奏</span><span class="chip">AI 唱腔纠错</span></div>
       </div>
-      <div class="rec">
-        <div class="rec-top"><span class="t">今日推介 <i></i></span><span class="pill">京剧</span></div>
-        <div class="rec-scroll">
-          <div class="rec-card">
-            <div class="art"><span class="mt">京剧</span><span class="art-note">♪</span></div>
-            <div class="txt"><b>京剧《锁麟囊》选段</b><small>惊艳转音</small></div>
+      <div class="sec-title"><b>核心功能</b><small>点击进入对应板块</small></div>
+      <div class="mods">
+        <div class="mod m1" onclick="go('learn')">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c-4.4 0-8 3.6-8 8v3c0 3.6 2.4 6.6 5.8 7.4-.2-.4-.3-.9-.3-1.4V16c0-1.7 1.3-3 3-3s3 1.3 3 3v3c0 .5-.1 1-.3 1.4C17.6 19.6 20 16.6 20 13v-3c0-4.4-3.6-8-8-8z"/></svg></div>
+          <div class="info"><b>教学辅助</b><small>AI 纠错 · 阶梯学习 · 经典折子</small>
+            <div class="tags"><i>唱腔纠错</i><i>逐字/逐句/跟唱</i><i>历史错题本</i></div>
           </div>
-          <div class="rec-card">
-            <div class="art"><span class="mt">粤剧</span><span class="art-note">♪</span></div>
-            <div class="txt"><b>粤剧《帝女花》</b><small>霸气唱腔</small></div>
-          </div>
+          <span class="arr">›</span>
         </div>
-        <div class="dots"><i class="on"></i><i></i><i></i></div>
+        <div class="mod m2" onclick="go('create')">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V22h2v-4.08A7 7 0 0 0 19 11h-2z"/></svg></div>
+          <div class="info"><b>AI 创作</b><small>歌曲转戏腔 · AI 生成伴奏</small>
+            <div class="tags"><i>歌曲戏腔化</i><i>情绪伴奏</i><i>文字唱段</i></div>
+          </div>
+          <span class="arr">›</span>
+        </div>
+        <div class="mod m3" onclick="go('community')">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+          <div class="info"><b>社区互动</b><small>作品分享 · 交流互评</small>
+            <div class="tags"><i>作品广场</i><i>点赞评论</i><i>戏友交流</i></div>
+          </div>
+          <span class="arr">›</span>
+        </div>
       </div>
-      <div class="fn">
-        <div class="fn-grid">
-          <div class="fn-card">
-            <div class="art"><span class="art-note">字</span></div>
-            <div class="t"><b>入门基础</b><small>入门指南</small></div>
-          </div>
-          <div class="fn-card">
-            <div class="art"><span class="art-note">曲</span></div>
-            <div class="t"><b>经典折子</b><small>经典折子</small></div>
-          </div>
-        </div>
-        <div class="fn-wide">
-          <div class="lt">
-            <div class="art"><span class="art-note">师</span></div>
-            <div><b>大师课</b><small>名家亲授 · 经典唱段</small></div>
-          </div>
-          <span class="more">更多课程 ＞</span>
-        </div>
+      <div class="stats">
+        <div class="st"><b>15h</b><small>练习时长</small></div>
+        <div class="st"><b>5</b><small>创作作品</small></div>
+        <div class="st"><b>120</b><small>获得点赞</small></div>
       </div>
     </div>
 
-    <!-- AI 学戏 -->
+    <!-- ===== 学戏（教学辅助） ===== -->
     <div class="page" id="page-learn">
-      <div class="head"><span class="back">‹</span><h2 style="font-size:14px;font-weight:500">学戏 · AI 纠错</h2><span class="r"><svg viewBox="0 0 24 24"><path d="M14 3h-4v7L4.9 18.5A2 2 0 0 0 6.7 22h10.6a2 2 0 0 0 1.8-3.5L14 10V3z"/></svg></span></div>
-      <div class="lt"><h3>海岛冰轮初转腾</h3><span>2023.10.28 14:30</span></div>
-      <div class="wave-card">
-        <div class="wc-top"><b>音高 / 声波对比</b><small id="waveStatus">标准示范 vs 我的演唱</small></div>
-        <div class="wave-box"><canvas id="waveCanvas"></canvas></div>
-        <div class="legend"><span><i style="background:#6E625C"></i>标准示范</span><span><i style="background:#8C7C75"></i>我的演唱</span></div>
-      </div>
-      <div class="lb">
-        <div class="lb-top"><b>歌词跟唱</b><small>当前：冰轮</small></div>
-        <div class="ls">
-          <span class="lw">太杨道</span><span class="lw">跑阴</span><span class="lw now">冰轮</span><span class="lw">铃和延</span><span class="lw">盘符</span><span class="lw">海岛</span><span class="lw">初转</span>
+      <!-- 选唱段 -->
+      <div id="learn-list">
+        <div class="head"><h2 style="font-size:16px">教学辅助</h2><span class="r"><svg viewBox="0 0 24 24"><path d="M14 3h-4v7L4.9 18.5A2 2 0 0 0 6.7 22h10.6a2 2 0 0 0 1.8-3.5L14 10V3z"/></svg></span></div>
+        <div class="sec-title"><b>选择学习阶段</b><small>初级 → 中级 → 高级</small></div>
+        <div class="card ladder">
+          <div class="node on" data-stage="1" onclick="pickStage(this)"><div class="dot">初</div><small>逐字</small></div>
+          <div class="line"><i class="pl" style="width:0%"></i></div>
+          <div class="node" data-stage="2" onclick="pickStage(this)"><div class="dot">中</div><small>逐句</small></div>
+          <div class="line"><i class="pl"></i></div>
+          <div class="node" data-stage="3" onclick="pickStage(this)"><div class="dot">高</div><small>跟唱</small></div>
         </div>
-      </div>
-      <div class="diag">
-        <div class="dt">分析结果</div>
-        <div class="d-it"><span class="lbl">跑腔点：音调跑偏 <small>12:03</small></span><span class="ic ok">✓</span></div>
-        <div class="d-it"><span class="lbl">待纠正：假字、气口 <small>14:27</small></span><span class="ic err">✕</span></div>
-      </div>
-      <button class="rec-btn" onclick="toast(this,'已保存到练习记录 ✓')">练习记录</button>
-    </div>
-
-    <!-- AI 创作 -->
-    <div class="page" id="page-create">
-      <div class="head create"><span style="width:30px"></span><h2>创作</h2><div class="deco"><i class="ln"></i><i class="ln"></i><span class="nt">♪</span></div><span style="width:30px"></span></div>
-      <div class="cb">
-        <div class="cc">
-          <div class="cc-top"><b>文字生成唱段</b><small>AI 谱曲</small></div>
-          <textarea class="cc-ta" placeholder="请在下面输入文字..."></textarea>
-          <div class="style-row"><span class="style-chip active">梅派</span><span class="style-chip">程派</span><span class="style-chip">荀派</span><span class="style-chip">新国风</span></div>
-          <button class="gen" onclick="toast(this,'正在生成唱段...')">生成</button>
-        </div>
-        <div class="cc">
-          <div class="cc-top"><b>歌曲腔调化</b><small>流行 → 戏曲</small></div>
-          <div class="cv-row">
-            <div class="seal s1 sm"><b>乐</b></div>
-            <div class="info"><b>上传一首流行歌曲</b><small>AI 自动改编为戏曲唱腔</small></div>
-            <button class="mini" onclick="toast(this,'正在改编...')">歌曲改编</button>
+        <div class="stage-desc" id="stageDesc">当前阶段：<b>初级 · 逐字学习</b>　从戏曲咬字开始，打牢发声基础</div>
+        <div class="sec-title"><b>阶段曲目</b><small>选择后进入 AI 纠错</small></div>
+        <div class="card">
+          <div class="list on" id="s1">
+            <div class="li" onclick="startPractice('戏曲咬字入门')"><div class="badge">字</div><div class="in"><b>戏曲咬字入门</b><small>尖团音 · 上口字</small></div><span class="arr">›</span></div>
+            <div class="li" onclick="startPractice('气息与发声')"><div class="badge">气</div><div class="in"><b>气息与发声</b><small>丹田气 · 气口练习</small></div><span class="arr">›</span></div>
+            <div class="li" onclick="startPractice('单字唱腔练习')"><div class="badge">韵</div><div class="in"><b>单字唱腔练习</b><small>从"字"到"腔"</small></div><span class="arr">›</span></div>
+          </div>
+          <div class="list" id="s2">
+            <div class="li" onclick="startPractice('《贵妃醉酒》逐句')"><div class="badge">醉</div><div class="in"><b>《贵妃醉酒》逐句</b><small>行腔 · 节奏巩固</small></div><span class="arr">›</span></div>
+            <div class="li" onclick="startPractice('《锁麟囊》逐句')"><div class="badge">锁</div><div class="in"><b>《锁麟囊》逐句</b><small>拖腔 · 换气练习</small></div><span class="arr">›</span></div>
+            <div class="li" onclick="startPractice('《霸王别姬》逐句')"><div class="badge">霸</div><div class="in"><b>《霸王别姬》逐句</b><small>悲腔 · 顿挫练习</small></div><span class="arr">›</span></div>
+          </div>
+          <div class="list" id="s3">
+            <div class="li" onclick="startPractice('《海岛冰轮初转腾》')"><div class="badge">海</div><div class="in"><b>《海岛冰轮初转腾》</b><small>伴奏跟唱 · 完整成品</small></div><span class="arr">›</span></div>
+            <div class="li" onclick="startPractice('京剧《锁麟囊》选段')"><div class="badge">锁</div><div class="in"><b>京剧《锁麟囊》选段</b><small>惊艳转音 · 整段跟唱</small></div><span class="arr">›</span></div>
+            <div class="li" onclick="startPractice('粤剧《帝女花》')"><div class="badge">帝</div><div class="in"><b>粤剧《帝女花》</b><small>霸气唱腔 · 整段跟唱</small></div><span class="arr">›</span></div>
           </div>
         </div>
       </div>
-      <div class="chars"><span>生</span><span>旦</span><span>净</span><span>丑</span></div>
+      <!-- AI 纠错 -->
+      <div id="learn-practice" style="display:none">
+        <div class="head"><span class="back" onclick="backToList()">‹</span><h2 style="font-size:14px;font-weight:500">AI 唱腔纠错</h2><span class="r"><svg viewBox="0 0 24 24"><path d="M14 3h-4v7L4.9 18.5A2 2 0 0 0 6.7 22h10.6a2 2 0 0 0 1.8-3.5L14 10V3z"/></svg></span></div>
+        <div class="lt"><h3 id="pSong">《海岛冰轮初转腾》</h3><span>2023.10.28 14:30</span></div>
+        <div class="card wave-card">
+          <div class="wc-top"><b>音高 / 声波对比</b><small id="waveStatus">标准示范 vs 我的演唱</small></div>
+          <div class="wave-box"><canvas id="waveCanvas"></canvas></div>
+          <div class="legend"><span><i style="background:#6E625C"></i>标准示范</span><span><i style="background:#8C7C75"></i>我的演唱</span></div>
+        </div>
+        <div class="card lb-card">
+          <div class="lb-top"><b>歌词跟唱</b><small>当前：冰轮</small></div>
+          <div class="ls"><span class="lw">太杨道</span><span class="lw">跑阴</span><span class="lw now">冰轮</span><span class="lw">铃和延</span><span class="lw">盘符</span></div>
+        </div>
+        <div class="card diag-card">
+          <div class="dt">本次分析</div>
+          <div class="d-it"><span class="lbl">跑腔点：音调跑偏 <small>12:03</small></span><span class="ic ok">✓</span></div>
+          <div class="d-it"><span class="lbl">待纠正：假字、气口 <small>14:27</small></span><span class="ic err">✕</span></div>
+        </div>
+        <button class="rec-btn" onclick="toast(this,'已保存到练习记录 ✓')">练习记录</button>
+        <div class="sec-title"><b>历史分析结果</b><small>错题本 · 随时回顾</small></div>
+        <div class="card his">
+          <div class="hi"><div class="date"><b>10.28</b><small>周二</small></div><div class="in"><b>《海岛冰轮初转腾》</b><div class="bar"><i style="width:86%"></i></div></div><div><div class="score">86</div><div class="st2">音准良好</div></div></div>
+          <div class="hi"><div class="date"><b>10.26</b><small>周日</small></div><div class="in"><b>《贵妃醉酒》</b><div class="bar"><i style="width:72%"></i></div></div><div><div class="score">72</div><div class="st2 g">2 处待练</div></div></div>
+          <div class="hi"><div class="date"><b>10.24</b><small>周五</small></div><div class="in"><b>《锁麟囊》</b><div class="bar"><i style="width:91%"></i></div></div><div><div class="score">91</div><div class="st2">进步明显</div></div></div>
+          <div class="hi"><div class="date"><b>10.21</b><small>周二</small></div><div class="in"><b>《帝女花》</b><div class="bar"><i style="width:64%"></i></div></div><div><div class="score">64</div><div class="st2 g">3 处待练</div></div></div>
+        </div>
+      </div>
     </div>
 
-    <!-- 社群 -->
+    <!-- ===== 创作（独立一级模块） ===== -->
+    <div class="page" id="page-create">
+      <div class="head create"><span style="width:30px"></span><h2>创作</h2><span style="width:30px"></span></div>
+      <div class="cats" style="margin-top:14px">
+        <div class="cat active" data-ct="song" onclick="pickCT(this)">歌曲转戏腔</div>
+        <div class="cat" data-ct="bgm" onclick="pickCT(this)">AI 伴奏</div>
+        <div class="cat" data-ct="lyric" onclick="pickCT(this)">文字唱段</div>
+      </div>
+      <div class="cb">
+        <div class="cp on" id="ct-song">
+          <div class="card cc">
+            <div class="cc-top"><b>歌曲转戏腔</b><span class="flag">主打</span></div>
+            <textarea class="cc-ta" placeholder="粘贴歌名或歌词，如：青花瓷 — 天青色等烟雨..."></textarea>
+            <div class="style-row"><span class="style-chip active">京剧化</span><span class="style-chip">越剧化</span><span class="style-chip">昆曲化</span><span class="style-chip">融合新编</span></div>
+            <button class="gen" onclick="toast(this,'正在转换戏腔...')">转换戏腔</button>
+          </div>
+        </div>
+        <div class="cp" id="ct-bgm">
+          <div class="card cc">
+            <div class="cc-top"><b>AI 生成伴奏</b><span class="flag">新</span></div>
+            <div class="style-row"><span class="style-chip active">激昂</span><span class="style-chip">温柔</span><span class="style-chip">典雅</span><span class="style-chip">幽怨</span></div>
+            <div class="style-row"><span class="style-chip active">30s</span><span class="style-chip">60s</span><span class="style-chip">120s</span></div>
+            <button class="gen gold" onclick="toast(this,'正在生成伴奏...')">生成伴奏</button>
+          </div>
+        </div>
+        <div class="cp" id="ct-lyric">
+          <div class="card cc">
+            <div class="cc-top"><b>文字生成唱段</b><small>AI 谱曲</small></div>
+            <textarea class="cc-ta" placeholder="请在下面输入文字..."></textarea>
+            <div class="style-row"><span class="style-chip active">梅派</span><span class="style-chip">程派</span><span class="style-chip">荀派</span><span class="style-chip">新国风</span></div>
+            <button class="gen" onclick="toast(this,'正在生成唱段...')">生成</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 社群 ===== -->
     <div class="page" id="page-community">
-      <div class="head"><span style="width:30px"></span><h2>社群</h2><span class="r"><svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></span></div>
+      <div class="head"><h2>社群</h2><span class="r"><svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></span></div>
       <div class="cs"><div class="search"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg> 京剧</div></div>
       <div class="fr"><span class="fchip">戏剧</span><span class="fchip">甜腔</span><span class="fchip">推荐</span></div>
       <div class="feed">
-        <div class="fcard">
+        <div class="card fcard">
           <div class="fu"><div class="ava">连</div><div><div class="un">戏韵小连A</div><div class="ut">1分钟前</div></div><span class="dt">···</span></div>
           <div class="ft">初试《贵妃醉酒》，请指教！</div>
-          <div class="fm">
-            <div class="fimg"><span class="art-note">图</span></div>
-            <div class="faudio"><div class="play">▶</div><div class="wl"><i style="height:8px"></i><i style="height:14px"></i><i style="height:18px"></i><i style="height:10px"></i><i style="height:16px"></i></div><small>初试《贵妃醉酒》</small></div>
-          </div>
+          <div class="fm"><div class="fimg"><span>图</span></div><div class="faudio"><div class="play">▶</div><div class="wl"><i style="height:8px"></i><i style="height:14px"></i><i style="height:18px"></i><i style="height:10px"></i><i style="height:16px"></i></div><small>初试《贵妃醉酒》</small></div></div>
           <div class="factions"><span>💬 评论</span><span>👍 赞赏</span><span>↪ 分享</span></div>
         </div>
-        <div class="fcard">
+        <div class="card fcard">
           <div class="fu"><div class="ava" style="background:linear-gradient(140deg,#C9A84C,#8E6B2C)">美</div><div><div class="un">戏韵小美</div><div class="ut">1分钟前</div></div><span class="dt">···</span></div>
           <div class="ft">新学了一段，大家听听~</div>
           <div class="fvoice"><div class="ava">美</div><div class="mw" id="miniWave"></div><div class="play">▶</div></div>
@@ -375,7 +420,7 @@ input,textarea{font-family:inherit;outline:none;border:none}
       <div class="post-bar"><input class="post-input" placeholder="语音输入"><button class="post-btn">发送</button></div>
     </div>
 
-    <!-- 我的 -->
+    <!-- ===== 我的 ===== -->
     <div class="page" id="page-profile">
       <div class="ph">
         <div class="ava">韵</div>
@@ -383,21 +428,21 @@ input,textarea{font-family:inherit;outline:none;border:none}
         <div class="pstats"><div class="st"><b>15h</b><small>练习时长</small></div><div class="st"><b>5</b><small>创作作品</small></div><div class="st"><b>120</b><small>获得点赞</small></div></div>
       </div>
       <svg class="arc" viewBox="0 0 420 36" preserveAspectRatio="none"><path d="M0 20 C45 2 85 2 120 12 C150 20 175 28 210 18 C245 8 285 2 330 12 C365 20 395 22 420 14 V36 H0 Z" fill="#F8F3E9"/></svg>
-      <div class="pm">
+      <div class="card pm">
         <div class="mi"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#6B131D" stroke-width="1.8"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20"/></svg></span> 我的学习 <span class="arr">›</span></div>
         <div class="mi"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#6B131D" stroke-width="1.8"><path d="M12 3a9 9 0 0 0 0 18c1.3 0 1.8-1 1.8-1.8 0-.5-.2-1-.2-1.4 0-.8.7-1.5 1.5-1.5H17A5 5 0 0 0 22 12c0-5-4.5-9-10-9z"/><circle cx="7.5" cy="10.5" r="1.1" fill="#6B131D"/><circle cx="12" cy="7.5" r="1.1" fill="#6B131D"/><circle cx="16.5" cy="10.5" r="1.1" fill="#6B131D"/></svg></span> 我的创作 <span class="arr">›</span></div>
-        <div class="mi"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#6B131D" stroke-width="1.8" stroke-linejoin="round"><path d="M17 3H7a2 2 0 0 0-2 2v16l7-4 7 4V5a2 2 0 0 0-2-2z"/></svg></span> 社群收藏 <span class="arr">›</span></div>
+        <div class="mi"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#6B131D" stroke-width="1.8" stroke-linejoin="round"><path d="M17 3H7a2 2 0 0 0-2 2v16l7-4 7 4V5a2 2 0 0 0-2-2z"/></svg></span> 我的错题本 <span class="arr">›</span></div>
         <div class="mi"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#6B131D" stroke-width="1.8"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58z"/><circle cx="12" cy="12" r="3.2"/></svg></span> 设置 <span class="arr">›</span></div>
       </div>
     </div>
 
   </div>
 
-  <!-- Tab -->
+  <!-- ===== 底部 Tab ===== -->
   <div class="tabbar">
     <div class="tab active" data-tab="home" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>首页</span></div>
-    <div class="tab" data-tab="create" onclick="go('create')"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg><span>创作</span></div>
-    <div class="tab c" data-tab="learn" onclick="go('learn')"><div class="bub"><svg viewBox="0 0 24 24"><path d="M12 2c-4.4 0-8 3.6-8 8v3c0 3.6 2.4 6.6 5.8 7.4-.2-.4-.3-.9-.3-1.4V16c0-1.7 1.3-3 3-3s3 1.3 3 3v3c0 .5-.1 1-.3 1.4C17.6 19.6 20 16.6 20 13v-3c0-4.4-3.6-8-8-8zm-1 5c0-.6.4-1 1-1s1 .4 1 1v4c0 .6-.4 1-1 1s-1-.4-1-1V7z"/></svg></div><span>AI 学戏</span></div>
+    <div class="tab" data-tab="learn" onclick="go('learn')"><svg viewBox="0 0 24 24"><path d="M12 2c-4.4 0-8 3.6-8 8v3c0 3.6 2.4 6.6 5.8 7.4-.2-.4-.3-.9-.3-1.4V16c0-1.7 1.3-3 3-3s3 1.3 3 3v3c0 .5-.1 1-.3 1.4C17.6 19.6 20 16.6 20 13v-3c0-4.4-3.6-8-8-8z"/></svg><span>学戏</span></div>
+    <div class="tab c" data-tab="create" onclick="go('create')"><div class="bub"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></div><span>创作</span></div>
     <div class="tab" data-tab="community" onclick="go('community')"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg><span>社群</span></div>
     <div class="tab" data-tab="profile" onclick="go('profile')"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span>我的</span></div>
   </div>
@@ -406,24 +451,43 @@ input,textarea{font-family:inherit;outline:none;border:none}
 <script>
 setTimeout(()=>{document.getElementById('splash').classList.add('hide');setTimeout(()=>document.getElementById('splash').style.display='none',600)},2000);
 function go(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelector('.tab[data-tab="'+n+'"]').classList.add('active');document.getElementById('main').scrollTop=0}
+function pickStage(el){
+  document.querySelectorAll('.ladder .node').forEach(n=>n.classList.remove('on'));
+  el.classList.add('on');
+  const s=parseInt(el.dataset.stage);
+  const lines=document.querySelectorAll('.ladder .line .pl');
+  const widths=[0,50,100];
+  lines.forEach((l,i)=>{l.style.width=widths[Math.min(i,s-1)]+'%'});
+  const desc=['初级 · 逐字学习','中级 · 逐句巩固','高级 · 伴奏跟唱'];
+  const note=['从戏曲咬字开始，打牢发声基础','逐句练习行腔与节奏，巩固单字组合','带入伴奏完整跟唱，输出整段成品'];
+  document.getElementById('stageDesc').innerHTML='当前阶段：<b>'+desc[s-1]+'</b>　'+note[s-1];
+  document.querySelectorAll('#learn-list .list').forEach(l=>l.classList.remove('on'));
+  document.getElementById('s'+s).classList.add('on');
+}
+function startPractice(name){
+  document.getElementById('pSong').textContent='《'+name.replace(/^《|》$/g,'')+'》';
+  document.getElementById('learn-list').style.display='none';
+  document.getElementById('learn-practice').style.display='block';
+  document.getElementById('main').scrollTop=0;
+  setTimeout(rsz,50);
+}
+function backToList(){
+  document.getElementById('learn-practice').style.display='none';
+  document.getElementById('learn-list').style.display='block';
+  document.getElementById('main').scrollTop=0;
+}
+function pickCT(el){
+  el.closest('.cats').querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.cp').forEach(p=>p.classList.remove('on'));
+  document.getElementById('ct-'+el.dataset.ct).classList.add('on');
+}
 const cv=document.getElementById('waveCanvas'),cx=cv.getContext('2d');let ph=0;
 function rsz(){const r=cv.parentElement.getBoundingClientRect();cv.width=r.width;cv.height=r.height}
-function drw(){
-  const w=cv.width,h=cv.height;cx.clearRect(0,0,w,h);
-  cx.strokeStyle='rgba(140,124,117,.10)';cx.lineWidth=1;
-  for(let i=0;i<5;i++){const y=h*.18+i*h*.16;cx.beginPath();cx.moveTo(0,y);cx.lineTo(w,y);cx.stroke()}
-  cx.beginPath();cx.strokeStyle='#6E625C';cx.lineWidth=2.2;
-  for(let x=0;x<w;x++){const y=h/2+Math.sin(x*.02+ph)*h*.16+Math.sin(x*.05+ph*.7)*h*.08;x===0?cx.moveTo(x,y):cx.lineTo(x,y)}
-  cx.stroke();
-  cx.beginPath();cx.strokeStyle='#8C7C75';cx.lineWidth=1.6;
-  for(let x=0;x<w;x++){const j=Math.sin(x*1.7+ph*3)*h*.012;const y=h/2+Math.sin(x*.022+ph*.8)*h*.20+Math.sin(x*.06+ph*1.3)*h*.10+j;x===0?cx.moveTo(x,y):cx.lineTo(x,y)}
-  cx.stroke();
-  [.22,.52,.78].forEach(m=>{const x=w*m,y=h/2+Math.sin(x*.022+ph*.8)*h*.20+Math.sin(x*.06+ph*1.3)*h*.10;cx.beginPath();cx.arc(x,y,4,0,7);cx.fillStyle='#E53935';cx.fill();cx.beginPath();cx.arc(x,y,8,0,7);cx.strokeStyle='rgba(229,57,53,.35)';cx.stroke();cx.font='9px sans-serif';cx.fillStyle='#E53935';cx.textAlign='center';cx.fillText('IN CA',x,y-12)});
-  ph+=.02;requestAnimationFrame(drw);
-}
+function drw(){const w=cv.width,h=cv.height;cx.clearRect(0,0,w,h);cx.strokeStyle='rgba(140,124,117,.10)';cx.lineWidth=1;for(let i=0;i<5;i++){const y=h*.18+i*h*.16;cx.beginPath();cx.moveTo(0,y);cx.lineTo(w,y);cx.stroke()}cx.beginPath();cx.strokeStyle='#6E625C';cx.lineWidth=2.2;for(let x=0;x<w;x++){const y=h/2+Math.sin(x*.02+ph)*h*.16+Math.sin(x*.05+ph*.7)*h*.08;x===0?cx.moveTo(x,y):cx.lineTo(x,y)}cx.stroke();cx.beginPath();cx.strokeStyle='#8C7C75';cx.lineWidth=1.6;for(let x=0;x<w;x++){const j=Math.sin(x*1.7+ph*3)*h*.012;const y=h/2+Math.sin(x*.022+ph*.8)*h*.20+Math.sin(x*.06+ph*1.3)*h*.10+j;x===0?cx.moveTo(x,y):cx.lineTo(x,y)}cx.stroke();[.22,.52,.78].forEach(m=>{const x=w*m,y=h/2+Math.sin(x*.022+ph*.8)*h*.20+Math.sin(x*.06+ph*1.3)*h*.10;cx.beginPath();cx.arc(x,y,4,0,7);cx.fillStyle='#E53935';cx.fill();cx.beginPath();cx.arc(x,y,8,0,7);cx.strokeStyle='rgba(229,57,53,.35)';cx.stroke();cx.font='9px sans-serif';cx.fillStyle='#E53935';cx.textAlign='center';cx.fillText('IN CA',x,y-12)});ph+=.02;requestAnimationFrame(drw)}
 window.addEventListener('load',()=>{rsz();drw()});window.addEventListener('resize',rsz);
 (function(){const mw=document.getElementById('miniWave');if(!mw)return;let s='';for(let i=0;i<26;i++)s+='<i style="height:'+(8+Math.round(Math.random()*18))+'px"></i>';mw.innerHTML=s})();
-document.addEventListener('click',e=>{const c=e.target.closest('.style-chip');if(c){document.querySelectorAll('.style-chip').forEach(x=>x.classList.remove('active'));c.classList.add('active')}});
+document.addEventListener('click',e=>{const c=e.target.closest('.style-chip');if(c){c.parentElement.querySelectorAll('.style-chip').forEach(x=>x.classList.remove('active'));c.classList.add('active')}});
 function toast(b,m){const o=b.textContent;b.textContent=m;b.style.opacity=.75;setTimeout(()=>{b.textContent=o;b.style.opacity=1},1200)}
 </script>
 </body>
