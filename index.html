@@ -59,9 +59,8 @@ input,textarea{font-family:inherit;outline:none;border:none}
 .tab.active{color:var(--primary)}
 .tab.active::before{content:'';position:absolute;top:0;left:34%;right:34%;height:2px;background:var(--primary);border-radius:0 0 2px 2px}
 .tab.c{position:relative}
-.tab.c .bub{position:absolute;top:-26px;left:50%;transform:translateX(-50%);width:56px;height:56px;border-radius:50%;background:linear-gradient(145deg,#8E2A33,#4C0C13);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(107,19,29,.38);border:3px solid var(--bg)}
+.tab.c .bub{position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:54px;height:54px;border-radius:50%;background:linear-gradient(145deg,#8E2A33,#4C0C13);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(107,19,29,.38);border:3px solid var(--bg)}
 .tab.c .bub svg{width:30px;height:30px;fill:#fff}
-.tab.c span{margin-top:34px}
 .tab.c.active::before{display:none}
 
 /* ===== 通用卡片 / 区块 ===== */
@@ -249,11 +248,6 @@ input,textarea{font-family:inherit;outline:none;border:none}
 <div class="splash" id="splash">
   <div class="ink"></div>
   <div class="emblem">韵</div>
-  <div class="app-ic"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 14.5a4 4 0 0 0 4-4V7a4 4 0 0 0-8 0v3.5a4 4 0 0 0 4 4z" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
-    <path d="M7.5 10.5a4.5 4.5 0 0 0 9 0M12 14.5V21M9.5 21h5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
-    <path d="M2.5 5.5h4M2.5 9h2.8M17.5 5.5h4M19.2 9H21.5M4.5 14h1.6M18 14h1.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
-  </svg></div>
   <h1>戏韵 AI</h1>
   <p class="slogan">声韵智能 · 传承与创新</p>
   <div class="bar"><i></i></div>
@@ -450,14 +444,13 @@ input,textarea{font-family:inherit;outline:none;border:none}
 
 <script>
 setTimeout(()=>{document.getElementById('splash').classList.add('hide');setTimeout(()=>document.getElementById('splash').style.display='none',600)},2000);
-function go(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelector('.tab[data-tab="'+n+'"]').classList.add('active');document.getElementById('main').scrollTop=0}
+function go(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelector('.tab[data-tab="'+n+'"]').classList.add('active');document.getElementById('main').scrollTop=0;if(n==='learn'){document.getElementById('learn-practice').style.display='none';document.getElementById('learn-list').style.display='block'}}
 function pickStage(el){
   document.querySelectorAll('.ladder .node').forEach(n=>n.classList.remove('on'));
   el.classList.add('on');
   const s=parseInt(el.dataset.stage);
   const lines=document.querySelectorAll('.ladder .line .pl');
-  const widths=[0,50,100];
-  lines.forEach((l,i)=>{l.style.width=widths[Math.min(i,s-1)]+'%'});
+  lines.forEach((l,i)=>{l.style.width=(i<s-1?100:0)+'%'});
   const desc=['初级 · 逐字学习','中级 · 逐句巩固','高级 · 伴奏跟唱'];
   const note=['从戏曲咬字开始，打牢发声基础','逐句练习行腔与节奏，巩固单字组合','带入伴奏完整跟唱，输出整段成品'];
   document.getElementById('stageDesc').innerHTML='当前阶段：<b>'+desc[s-1]+'</b>　'+note[s-1];
@@ -465,7 +458,7 @@ function pickStage(el){
   document.getElementById('s'+s).classList.add('on');
 }
 function startPractice(name){
-  document.getElementById('pSong').textContent='《'+name.replace(/^《|》$/g,'')+'》';
+  document.getElementById('pSong').textContent=name;
   document.getElementById('learn-list').style.display='none';
   document.getElementById('learn-practice').style.display='block';
   document.getElementById('main').scrollTop=0;
